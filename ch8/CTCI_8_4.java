@@ -11,31 +11,24 @@ public class MyClass {
     
     public static ArrayList<String> getPowerSet(int[] set) { 
         ArrayList<String> list = new ArrayList<String>(); 
-        HashSet<String> hSet = new HashSet<String>(); 
     
         if(set == null || set.length == 0) { 
             list.add(""); 
             return list; 
         }
         
-        helper(set, list, "", 0, hSet); 
+        helper(set, list, "", 0); 
         return list; 
     }
     
-    public static void helper(int[] set, ArrayList<String> list, String str, int index, HashSet<String> hSet) { 
+    public static void helper(int[] set, ArrayList<String> list, String str, int index) { 
         if(index == set.length) { 
-        		if(!hSet.contains(str)) { 
-        			list.add(str.trim());
-        			hSet.add(str); 
-        		}
+        		list.add(str.trim());
             return; 
         }
         
-        for(int i=index; i<set.length; i++) { 
-            helper(set, list, str, i+1, hSet); 
-            helper(set, list, str + " " + set[i], i+1, hSet); 
-        }
-        
+        helper(set, list, str, index+1); 
+        helper(set, list, str + " " + set[index], index+1);    
         return; 
     }
 }
